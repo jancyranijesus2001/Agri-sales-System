@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary fw-bold">♻️ Biodegradable Waste Listings</h2>
+
+    <div class="text-end mb-3">
+        <a href="{% url 'waste_create' %}" class="btn btn-success fw-bold px-4 py-2">➕ Add Waste</a>
+    </div>
+
+    <div class="row">
+        {% for waste in wastes %}
+        <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <!-- Image -->
+                <div class="position-relative">
+                    <img src="{{ waste.image.url }}" alt="Waste Image" class="card-img-top" style="height: 220px; object-fit: cover; transition: 0.3s;">
+                </div>
+
+                <!-- Card Content -->
+                <div class="card-body text-center d-flex flex-column">
+                    <!-- Waste Name -->
+                    <h5 class="card-title fw-bold text-dark">{{ waste.name }}</h5>
+
+                    <!-- Category & Weight -->
+                    <p class="text-muted mb-1"><strong>Category:</strong> {{ waste.waste_category }}</p>
+                    <p class="mb-1"><strong>Weight:</strong> {{ waste.total_kg }} KG</p>
+
+                    <!-- Seller Info -->
+                    <p class="text-muted small">📞 {{ waste.mobile }}</p>
+
+                    <!-- Status Badge -->
+                    <p>
+                        <span class="badge {% if waste.status == 'Available' %} bg-success {% else %} bg-danger {% endif %} p-2 fs-6">
+                            {{ waste.status }}
+                        </span>
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-auto">
+                        <a href="#" class="btn btn-warning btn-sm w-100 fw-bold py-2">🛒 Add to Cart</a>
+                        <div class="d-flex justify-content-between mt-2">
+                            <a href="{% url 'waste_update' waste.id %}" class="btn btn-secondary btn-sm px-3">✏️ Edit</a>
+                            <a href="{% url 'waste_delete' waste.id %}" class="btn btn-danger btn-sm px-3">🗑️ Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center text-muted">
+            <p>No waste records available.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Custom Amazon-Like Styling -->
+<style>
+    /* Card Hover Effect */
+    .card:hover {
+        transform: scale(1.02);
+        transition: 0.3s;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Image Hover */
+    .card-img-top:hover {
+        filter: brightness(90%);
+    }
+
+    /* Add to Cart Button - Amazon Style */
+    .btn-warning {
+        background: linear-gradient(135deg, #ff9900, #ff6600);
+        border: none;
+        color: white;
+    }
+
+    .btn-warning:hover {
+        background: linear-gradient(135deg, #ff6600, #ff3300);
+    }
+</style>
+{% endblock %}

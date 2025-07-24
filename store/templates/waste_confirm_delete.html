@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 text-center">
+        <h2 class="text-danger">⚠ Delete Confirmation</h2>
+        <p class="fs-5">Are you sure you want to delete <strong>"{{ waste.name }}"</strong>?</p>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger me-2">🗑 Yes, Delete</button>
+            <a href="{% url 'waste_list' %}" class="btn btn-secondary">❌ Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

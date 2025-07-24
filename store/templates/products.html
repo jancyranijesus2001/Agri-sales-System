@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-dark:hover {
+    background-color: #333;
+}
+
+</style>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Today Market Prices</h1>
+    <div class="row">
+        {% for entry in today_prices %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ entry.product.name }}</h5>
+                        <p class="card-text text-primary fw-bold fs-4">₹{{ entry.price }}</p>
+                        <a href="{% url 'store'%}" class="btn btn-dark rounded-pill px-4">Go to Store</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted fs-5">No price history available for today.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
