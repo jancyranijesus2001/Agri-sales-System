@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: agri-sales-system
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn AgriSalesSystem.wsgi:application
