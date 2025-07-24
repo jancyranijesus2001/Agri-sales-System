@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 appdirs==1.4.4
 asgiref==3.8.1
 astroid==2.5.3
@@ -18,8 +17,3 @@ sqlparse==0.4.1
 toml==0.10.2
 virtualenv==20.4.3
 wrapt==1.12.1
-
-
-
-=======
->>>>>>> 22afb4e (upgrade packages to support Python 3.13)
